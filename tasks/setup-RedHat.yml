@@ -1,5 +1,5 @@
 ---
-- name: DNF update the system
+- name: Upgrade all dnf packages
   ansible.builtin.dnf:
     name:  "*"
     state: latest
@@ -11,7 +11,7 @@
     state: latest
   when: upgrade_packages_reboot_if_needed|bool == true and ansible_facts['pkg_mgr'] == 'dnf'
 
-- name: Yum update the system
+- name: Upgrade all yum packages
   ansible.builtin.yum:
     name: "*"
     state: latest
@@ -23,7 +23,7 @@
     state: latest
   when: upgrade_packages_reboot_if_needed|bool == true and ansible_facts['pkg_mgr'] == 'yum'
 
-- name: Reboot required
+- name: Check if a reboot is required after upgrade
   ansible.builtin.command: "/usr/bin/needs-restarting -r"
   register: reboot_required
   ignore_errors: True

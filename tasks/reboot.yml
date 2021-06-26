@@ -1,7 +1,4 @@
 ---
-- debug:
-  var: reboot_required
-
 - name: Reboot the server
   ansible.builtin.reboot:
     msg: "Reboot initiated by Ansible due to kernel updates"
@@ -10,13 +7,13 @@
     pre_reboot_delay: 0
     post_reboot_delay: 30
     test_command: uptime
-  when: reboot_required|default(false)|bool == true
+  when: upgrade_packages_reboot_if_needed|bool == true and reboot_required|bool == true
 
 - name: Check the uptime post reboot
   ansible.builtin.shell: uptime
   register: UPTIME_POST_REBOOT
-  when: upgrade_packages_reboot_if_needed|bool == true and reboot_required|default(false)|bool == true
+  when: upgrade_packages_reboot_if_needed|bool == true and reboot_required|bool == true
 
 - ansible.builtin.debug:
     msg: "{{ UPTIME_POST_REBOOT.stdout }}"
-  when: upgrade_packages_reboot_if_needed|bool == true and reboot_required|default(false)|bool == true
+  when: upgrade_packages_reboot_if_needed|bool == true and reboot_required|bool == true

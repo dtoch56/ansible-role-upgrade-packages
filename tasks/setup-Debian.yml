@@ -11,7 +11,7 @@
     force_apt_get: yes
   when: upgrade_packages_all|bool == true
 
-- name: Check if a reboot is needed after upgrade
+- name: Check if a reboot is required after upgrade
   register: reboot_required_file
   ansible.builtin.stat:
     path: /var/run/reboot-required

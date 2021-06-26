@@ -6,4 +6,4 @@
   when: ansible_os_family == 'Debian'
 
 - include_tasks: reboot.yml
-  when: upgrade_packages_reboot_if_needed|bool == true and reboot_required|bool == true
+  when: upgrade_packages_reboot_if_needed|bool == true and reboot_required|default(false)|bool == true

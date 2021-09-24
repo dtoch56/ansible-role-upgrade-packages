@@ -11,6 +11,14 @@
     force_apt_get: yes
   when: upgrade_packages_all|bool == true
 
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+
 - name: Check if a reboot is required after upgrade
   register: reboot_required_file
   ansible.builtin.stat:

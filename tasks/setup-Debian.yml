@@ -12,11 +12,11 @@
   when: upgrade_packages_all|bool == true
 
 - name: Remove useless packages from the cache
-  apt:
+  ansible.builtin.apt:
     autoclean: yes
 
 - name: Remove dependencies that are no longer required
-  apt:
+  ansible.builtin.apt:
     autoremove: yes
 
 - name: Check if a reboot is required after upgrade

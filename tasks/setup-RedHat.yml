@@ -1,7 +1,7 @@
 ---
 - name: Upgrade all dnf packages
   ansible.builtin.dnf:
-    name:  "*"
+    name: "*"
     state: latest
   when: upgrade_packages_all|bool == true and ansible_facts['pkg_mgr'] == 'dnf'
 
@@ -26,8 +26,8 @@
 - name: Check if a reboot is required after upgrade
   ansible.builtin.command: "/usr/bin/needs-restarting -r"
   register: reboot_required
-  ignore_errors: True
-  changed_when: False
+  ignore_errors: true
+  changed_when: false
   failed_when: reboot_required.rc == 2
   when: upgrade_packages_reboot_if_needed|bool == true
 

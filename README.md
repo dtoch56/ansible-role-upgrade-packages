@@ -2,6 +2,7 @@ Upgrade Packages ansible role
 =========
 
 [![CI](https://github.com/dtoch56/ansible-role-upgrade-packages/workflows/CI/badge.svg?event=push)](https://github.com/dtoch56/ansible-role-upgrade-packages/actions?query=workflow%3ACI)
+[![Release](https://github.com/dtoch56/ansible-role-upgrade-packages/workflows/Release/badge.svg?event=push)](https://github.com/dtoch56/ansible-role-upgrade-packages/actions?query=workflow%3ARelease)
 
 Ansible role to upgrade all packages, process package manager cleanup, and reboot host if needed.
 

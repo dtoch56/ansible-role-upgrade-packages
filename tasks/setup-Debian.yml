@@ -29,4 +29,4 @@
 - name: Set reboot_required variable
   ansible.builtin.set_fact:
     reboot_required: true
-  when: reboot_required_file.stat.exists
+  when: upgrade_packages_reboot_if_needed|bool == true and reboot_required_file.stat.exists

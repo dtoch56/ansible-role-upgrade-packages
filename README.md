@@ -16,10 +16,10 @@ Role Variables
 
 Available variables are listed below, along with default values (see defaults/main.yml):
 
-| Variable                          | Description           | Default  |
-| --------------------------------- |:----------------------|:-------- |
-| upgrade_packages_all              | Upgrade all packages  | true     |
-| upgrade_packages_reboot_if_needed | Reboot host if needed | true     |
+| Variable                          | Description           | Default |
+|-----------------------------------|:----------------------|:--------|
+| upgrade_packages_all              | Upgrade all packages  | true    |
+| upgrade_packages_reboot_if_needed | Reboot host if needed | true    |
 
 Dependencies
 ------------

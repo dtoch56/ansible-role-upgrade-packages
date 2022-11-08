@@ -8,6 +8,36 @@
     - defaults/main.yml
 
   tasks:
-    - include_tasks: tasks/main.yml
-      vars:
-        upgrade_packages_reboot_if_needed: false
+  - name: apt | Check updates
+    block:
+    - name: Get available updates
+      ansible.builtin.command: apt list --upgradable -a
+      register: updates
+    - name: Assert
+      ansible.builtin.assert:
+        that: updates.stdout_lines | count == 1
+    when: ansible_pkg_mgr == 'apt'
+
+  - name: yum | Check updates
+    block:
+    - name: Get available updates
+      ansible.builtin.command: yum check-update
+      register: updates
+      ignore_errors: yes
+    - debug:
+        var: updates
+    - name: Assert
+      ansible.builtin.assert:
+        that: updates.rc == 0
+    when: ansible_pkg_mgr == 'yum'
+
+  - name: dnf | Check updates
+    block:
+    - name: Get available updates
+      ansible.builtin.command: dnf check-update
+      register: updates
+      ignore_errors: yes
+    - name: Assert
+      ansible.builtin.assert:
+        that: updates.rc == 0
+    when: ansible_pkg_mgr == 'dnf'

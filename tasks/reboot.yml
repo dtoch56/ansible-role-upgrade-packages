@@ -7,13 +7,14 @@
     pre_reboot_delay: 0
     post_reboot_delay: 30
     test_command: uptime
-  when: upgrade_packages_reboot_if_needed|bool == true and reboot_required|bool == true
+  when: upgrade_packages_reboot_if_needed and reboot_required
 
 - name: Check the uptime post reboot
-  ansible.builtin.shell: uptime
-  register: UPTIME_POST_REBOOT
-  when: upgrade_packages_reboot_if_needed|bool == true and reboot_required|bool == true
+  ansible.builtin.command: uptime
+  register: uptime_post_reboot
+  when: upgrade_packages_reboot_if_needed and reboot_required
 
-- ansible.builtin.debug:
-    msg: "{{ UPTIME_POST_REBOOT.stdout }}"
-  when: upgrade_packages_reboot_if_needed|bool == true and reboot_required|bool == true
+- name: Uptime post reboot
+  ansible.builtin.debug:
+    msg: "{{ uptime_post_reboot.stdout }}"
+  when: upgrade_packages_reboot_if_needed and reboot_required

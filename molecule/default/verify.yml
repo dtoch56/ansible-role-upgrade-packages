@@ -4,7 +4,13 @@
 - name: Verify
   hosts: all
   gather_facts: false
+
   tasks:
+  - name:
+    command: apt list --upgradable
+    register: updates
+  - debug: var=updates.stdout_lines
   - name: Example assertion
-    assert:
+    ansible.builtin.assert:
       that: true
+

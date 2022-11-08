@@ -4,7 +4,7 @@ galaxy_info:
   role_name: upgrade_packages
   description: Upgrade all packages with package manager
   license: MIT
-  min_ansible_version: 2.1
+  min_ansible_version: '2.1'
   platforms:
     - name: EL
       versions:
@@ -22,4 +22,5 @@ galaxy_info:
     - upgrade
     - packages
 
-dependencies: []
+dependencies:
+  - community.general

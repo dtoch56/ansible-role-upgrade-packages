@@ -6,11 +6,37 @@
   gather_facts: false
 
   tasks:
-  - name:
-    command: apt list --upgradable
-    register: updates
-  - debug: var=updates.stdout_lines
-  - name: Example assertion
-    ansible.builtin.assert:
-      that: true
+    - name: Check updates | apt
+      when: ansible_pkg_mgr == 'apt'
+      block:
+        - name: Get available updates
+          ansible.builtin.command: apt list --upgradable -a
+          register: updates
+          changed_when: false
+        - name: Assert
+          ansible.builtin.assert:
+            that: updates.stdout_lines | count == 1
 
+    - name: Check updates | yum
+      when: ansible_pkg_mgr == 'yum'
+      block:
+        - name: Get available updates
+          ansible.builtin.command: yum check-update
+          register: updates
+          ignore_errors: true
+          changed_when: false
+        - name: Assert
+          ansible.builtin.assert:
+            that: updates.rc == 0
+
+    - name: Check updates | dnf
+      when: ansible_pkg_mgr == 'dnf'
+      block:
+        - name: Get available updates
+          ansible.builtin.command: dnf check-update
+          register: updates
+          ignore_errors: true
+          changed_when: false
+        - name: Assert
+          ansible.builtin.assert:
+            that: updates.rc == 0

@@ -15,3 +15,5 @@ provisioner:
   name: ansible
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+collections:
+  - community.general

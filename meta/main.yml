@@ -22,5 +22,4 @@ galaxy_info:
     - upgrade
     - packages
 
-collections:
-  - community.general
+dependencies: []

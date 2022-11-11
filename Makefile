@@ -32,7 +32,5 @@ lint:
 	molecule syntax
 
 test:
-	molecule check
-	molecule side-effect
 	molecule syntax
 	molecule verify

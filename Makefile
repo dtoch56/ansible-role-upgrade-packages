@@ -1,3 +1,5 @@
+SHELL = /bin/bash
+
 .PHONY: help venv run update lint
 
 help:
@@ -26,3 +28,11 @@ update:
 lint:
 	yamllint .
 	ansible-lint
+	molecule lint
+	molecule syntax
+
+test:
+	molecule check
+	molecule side-effect
+	molecule syntax
+	molecule verify

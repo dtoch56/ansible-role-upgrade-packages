@@ -1,6 +1,6 @@
 SHELL = /bin/bash
 
-.PHONY: help venv run update lint
+.PHONY: help venv run update lint test
 
 help:
 	@echo ''
@@ -10,6 +10,7 @@ help:
 	@echo '  run     Run main playbook'
 	@echo '  update  Update python dependencies'
 	@echo '  lint    Run yamllint'
+	@echo '  test    Run molecule'
 	@echo ''
 
 
